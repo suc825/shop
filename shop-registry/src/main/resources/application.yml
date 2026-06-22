@@ -14,5 +14,7 @@ eureka:
     eviction-interval-timer-in-ms: 5000
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: shop-registry

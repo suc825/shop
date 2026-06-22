@@ -11,6 +11,8 @@ cors:
   allowedOrigins: http://localhost:8086,http://localhost:8081,http://localhost:8082
 
 spring:
+  main:
+    allow-bean-definition-overriding: true
     datasource:
         driverClassName: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8

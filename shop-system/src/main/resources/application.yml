@@ -4,11 +4,6 @@ server:
 spring:
   application:
     name: shop-system
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
-    username: root
-    password: your-db-password
   redis:
     host: localhost
     port: 6379
@@ -17,8 +12,21 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: your-rabbitmq-username
-    password: your-rabbitmq-password
+    username: guest
+    password: guest
+
+# 主从数据源配置
+datasource:
+  master:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  slave:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
 
 eureka:
   client:
@@ -42,15 +50,6 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
-
-# 阿里云OSS配置
-aliyun:
-  oss:
-    endpoint: oss-cn-hangzhou.aliyuncs.com
-    accessKeyId: your-access-key-id
-    accessKeySecret: your-access-key-secret
-    bucketName: suc1
-
 
 management:
   endpoints:

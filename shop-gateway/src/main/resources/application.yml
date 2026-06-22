@@ -4,16 +4,24 @@ server:
 spring:
   application:
     name: shop-gateway
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
-    username: root
-    password: your-db-password
   redis:
     host: localhost
     port: 6379
     password:
     database: 0
+
+# 主从数据源配置
+datasource:
+  master:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  slave:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml,classpath*:com/shop/common/dao/*.xml
@@ -40,7 +48,6 @@ eureka:
 
 zuul:
   routes:
-    # 用户服务路由
     users:
       path: /users/**
       service-id: shop-user
@@ -53,7 +60,6 @@ zuul:
       path: /token/**
       service-id: shop-user
       strip-prefix: false
-    # 商品服务路由
     shangpinxinxi:
       path: /shangpinxinxi/**
       service-id: shop-product
@@ -62,7 +68,6 @@ zuul:
       path: /shangpinfenlei/**
       service-id: shop-product
       strip-prefix: false
-    # 订单服务路由
     orders:
       path: /orders/**
       service-id: shop-order
@@ -71,7 +76,6 @@ zuul:
       path: /dingdanpingjia/**
       service-id: shop-order
       strip-prefix: false
-    # 购物服务路由
     cart:
       path: /cart/**
       service-id: shop-shopping
@@ -84,7 +88,6 @@ zuul:
       path: /address/**
       service-id: shop-shopping
       strip-prefix: false
-    # 内容服务路由
     news:
       path: /news/**
       service-id: shop-content
@@ -97,7 +100,6 @@ zuul:
       path: /chat/**
       service-id: shop-content
       strip-prefix: false
-    # 系统服务路由
     config:
       path: /config/**
       service-id: shop-system
