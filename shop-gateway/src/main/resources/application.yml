@@ -1,0 +1,150 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: shop-gateway
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ShopOnline?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: your-db-password
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml,classpath*:com/shop/common/dao/*.xml
+  typeAliasesPackage: com.shop.common.entity
+  global-config:
+    id-type: 1
+    field-strategy: 1
+    db-column-underline: true
+    refresh-mapper: true
+    logic-delete-value: -1
+    logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+zuul:
+  routes:
+    # 用户服务路由
+    users:
+      path: /users/**
+      service-id: shop-user
+      strip-prefix: false
+    yonghu:
+      path: /yonghu/**
+      service-id: shop-user
+      strip-prefix: false
+    token:
+      path: /token/**
+      service-id: shop-user
+      strip-prefix: false
+    # 商品服务路由
+    shangpinxinxi:
+      path: /shangpinxinxi/**
+      service-id: shop-product
+      strip-prefix: false
+    shangpinfenlei:
+      path: /shangpinfenlei/**
+      service-id: shop-product
+      strip-prefix: false
+    # 订单服务路由
+    orders:
+      path: /orders/**
+      service-id: shop-order
+      strip-prefix: false
+    dingdanpingjia:
+      path: /dingdanpingjia/**
+      service-id: shop-order
+      strip-prefix: false
+    # 购物服务路由
+    cart:
+      path: /cart/**
+      service-id: shop-shopping
+      strip-prefix: false
+    storeup:
+      path: /storeup/**
+      service-id: shop-shopping
+      strip-prefix: false
+    address:
+      path: /address/**
+      service-id: shop-shopping
+      strip-prefix: false
+    # 内容服务路由
+    news:
+      path: /news/**
+      service-id: shop-content
+      strip-prefix: false
+    discussshangpinxinxi:
+      path: /discussshangpinxinxi/**
+      service-id: shop-content
+      strip-prefix: false
+    chat:
+      path: /chat/**
+      service-id: shop-content
+      strip-prefix: false
+    # 系统服务路由
+    config:
+      path: /config/**
+      service-id: shop-system
+      strip-prefix: false
+    common:
+      path: /common/**
+      service-id: shop-system
+      strip-prefix: false
+    file:
+      path: /file/**
+      service-id: shop-system
+      strip-prefix: false
+    option:
+      path: /option/**
+      service-id: shop-system
+      strip-prefix: false
+    follow:
+      path: /follow/**
+      service-id: shop-system
+      strip-prefix: false
+    sh:
+      path: /sh/**
+      service-id: shop-system
+      strip-prefix: false
+    remind:
+      path: /remind/**
+      service-id: shop-system
+      strip-prefix: false
+    cal:
+      path: /cal/**
+      service-id: shop-system
+      strip-prefix: false
+    group:
+      path: /group/**
+      service-id: shop-system
+      strip-prefix: false
+    value:
+      path: /value/**
+      service-id: shop-system
+      strip-prefix: false
+    location:
+      path: /location/**
+      service-id: shop-system
+      strip-prefix: false
+    matchFace:
+      path: /matchFace/**
+      service-id: shop-system
+      strip-prefix: false
+  sensitive-headers:
+  add-host-header: true

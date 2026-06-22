@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="../../layui/css/layui.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style type="text/css">
+        :root {
+            --primary: #4F94EF;
+            --primary-dark: #2563EB;
+            --accent: #10B981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        .login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #0F172A;
+        }
+
+        .login::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(79, 148, 239, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 60%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+            animation: bgFloat 20s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-2%, 3%) rotate(1deg); }
+            50% { transform: translate(2%, -2%) rotate(-1deg); }
+            75% { transform: translate(-1%, -3%) rotate(0.5deg); }
+        }
+
+        .login::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 0;
+            animation: orbFloat 15s ease-in-out infinite;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: rgba(79, 148, 239, 0.12); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: rgba(16, 185, 129, 0.1); bottom: -80px; left: -80px; animation-delay: -5s; }
+        .orb-3 { width: 200px; height: 200px; background: rgba(139, 92, 246, 0.08); top: 50%; left: 20%; animation-delay: -10s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 30px) scale(0.95); }
+        }
+
+        .login-form {
+            position: relative;
+            z-index: 10;
+            width: 420px;
+            padding: 48px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05) inset, 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: cardIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+
+        .login-form .logo { text-align: center; margin-bottom: 8px; }
+
+        .login-form .logo .logo-icon {
+            width: 56px; height: 56px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(79, 148, 239, 0.3);
+            animation: logoPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes logoPulse {
+            0%, 100% { box-shadow: 0 8px 24px rgba(79, 148, 239, 0.3); }
+            50% { box-shadow: 0 8px 32px rgba(79, 148, 239, 0.5); }
+        }
+
+        .login-form .logo .logo-icon svg { width: 28px; height: 28px; color: white; }
+
+        .login-form .title { text-align: center; margin-bottom: 32px; }
+        .login-form .title h2 { font-size: 24px; font-weight: 700; color: #FFFFFF; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .login-form .title p { font-size: 14px; color: rgba(255, 255, 255, 0.5); }
+
+        .form-item { margin-bottom: 20px; position: relative; }
+        .form-item .input-wrap { position: relative; display: flex; align-items: center; }
+
+        .form-item .input-icon {
+            position: absolute; left: 16px;
+            width: 18px; height: 18px;
+            color: rgba(255, 255, 255, 0.35);
+            pointer-events: none;
+            transition: color 0.25s ease;
+            z-index: 2;
+        }
+
+        .form-item input:focus ~ .input-icon,
+        .form-item input:not(:placeholder-shown) ~ .input-icon { color: var(--primary); }
+
+        .form-item input.layui-input {
+            width: 100%; height: 50px;
+            padding: 0 16px 0 46px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #FFFFFF;
+            font-size: 15px; font-family: inherit;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .form-item input.layui-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+        .form-item input.layui-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 148, 239, 0.2);
+        }
+
+        .form-item input.layui-input:hover:not(:focus) {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-submit {
+            width: 100%; height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none; border-radius: 12px;
+            color: #FFFFFF;
+            font-size: 16px; font-weight: 600; font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative; overflow: hidden;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-submit::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79, 148, 239, 0.4); }
+        .btn-submit:hover::before { opacity: 1; }
+        .btn-submit:active { transform: translateY(0); }
+
+        .login-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .login-footer a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.45);
+            text-decoration: none;
+            transition: color 0.25s ease;
+            cursor: pointer;
+        }
+
+        .login-footer a:hover { color: var(--primary); }
+
+        .login-footer .register-link { color: var(--primary); font-weight: 500; }
+        .login-footer .register-link:hover { color: #6BA8F7; }
+
+        .msg-warn {
+            display: none;
+            padding: 10px 16px;
+            background: rgba(79, 148, 239, 0.1);
+            border: 1px solid rgba(79, 148, 239, 0.2);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 24px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .msg-warn.show { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-card {
+            width: 400px;
+            background: rgba(30, 41, 59, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: modalIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .modal-card .modal-desc {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 28px;
+        }
+
+        .modal-card .form-item { margin-bottom: 16px; }
+
+        .modal-card .form-item label {
+            display: block;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .modal-card .form-item input {
+            width: 100%; height: 44px;
+            padding: 0 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #FFFFFF;
+            font-size: 14px; font-family: inherit;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .modal-card .form-item input::placeholder { color: rgba(255, 255, 255, 0.25); }
+
+        .modal-card .form-item input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 148, 239, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-card .result-msg {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .modal-card .result-msg.success {
+            display: block;
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #6EE7B7;
+        }
+
+        .modal-card .result-msg.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #FCA5A5;
+        }
+
+        .modal-btns {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .modal-btns .btn-cancel {
+            flex: 1; height: 44px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px; font-weight: 500; font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .modal-btns .btn-cancel:hover { background: rgba(255, 255, 255, 0.1); }
+
+        .modal-btns .btn-confirm {
+            flex: 1; height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none; border-radius: 10px;
+            color: #FFFFFF;
+            font-size: 14px; font-weight: 600; font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .modal-btns .btn-confirm:hover { box-shadow: 0 4px 16px rgba(79, 148, 239, 0.4); }
+
+        @media (max-width: 480px) {
+            .login-form { width: calc(100% - 32px); padding: 36px 28px; border-radius: 20px; }
+            .modal-card { width: calc(100% - 32px); margin: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="login">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+
+        <!-- Login Form -->
+        <form class="layui-form login-form">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 01-8 0"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="title">
+                <h2>欢迎回来</h2>
+                <p>登录您的账户以继续购物</p>
+            </div>
+
+            <div class="msg-warn show">
+                <svg style="width:14px;height:14px;display:inline;vertical-align:-2px;margin-right:4px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                公共场所不建议自动登录，以防账号丢失
+            </div>
+
+            <div class="form-item">
+                <div class="input-wrap">
+                    <input type="text" name="username" required lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="input-wrap">
+                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Hidden role = yonghu -->
+            <input type="hidden" name="role" value="yonghu">
+
+            <button class="layui-btn layui-btn-fluid btn-submit" lay-submit lay-filter="login">登 录</button>
+
+            <div class="login-footer">
+                <a onclick="showResetModal()">忘记密码？</a>
+                <a class="register-link" href="javascript:registerClick('yonghu')">注册用户</a>
+            </div>
+        </form>
+
+        <!-- Forgot Password Modal -->
+        <div id="resetModal" class="modal-overlay" @click.self="closeResetModal()">
+            <div class="modal-card">
+                <h3>重置密码</h3>
+                <p class="modal-desc">请输入您的账号和绑定的手机号码，验证通过后密码将重置为 123456</p>
+
+                <div id="resetResult" class="result-msg"></div>
+
+                <div class="form-item">
+                    <label>账号</label>
+                    <input type="text" id="resetUsername" placeholder="请输入您的账号" autocomplete="off">
+                </div>
+
+                <div class="form-item">
+                    <label>手机号码</label>
+                    <input type="text" id="resetPhone" placeholder="请输入绑定的手机号码" autocomplete="off" maxlength="11">
+                </div>
+
+                <div class="modal-btns">
+                    <button class="btn-cancel" onclick="closeResetModal()">取消</button>
+                    <button class="btn-confirm" onclick="submitReset()">确认重置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../layui/layui.js"></script>
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../modules/config.js"></script>
+    <script src="../../js/utils.js"></script>
+    <script type="text/javascript">
+        var vue = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                closeResetModal: function() {
+                    document.getElementById('resetModal').classList.remove('active');
+                    document.getElementById('resetUsername').value = '';
+                    document.getElementById('resetPhone').value = '';
+                    var resultEl = document.getElementById('resetResult');
+                    resultEl.className = 'result-msg';
+                    resultEl.style.display = 'none';
+                }
+            }
+        });
+
+        function showResetModal() {
+            document.getElementById('resetModal').classList.add('active');
+        }
+
+        function closeResetModal() {
+            vue.closeResetModal();
+        }
+
+        function submitReset() {
+            var username = document.getElementById('resetUsername').value.trim();
+            var phone = document.getElementById('resetPhone').value.trim();
+            var resultEl = document.getElementById('resetResult');
+
+            if (!username) {
+                resultEl.className = 'result-msg error';
+                resultEl.textContent = '请输入账号';
+                return;
+            }
+            if (!phone) {
+                resultEl.className = 'result-msg error';
+                resultEl.textContent = '请输入手机号码';
+                return;
+            }
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                resultEl.className = 'result-msg error';
+                resultEl.textContent = '请输入正确的手机号码';
+                return;
+            }
+
+            // Verify username + phone match
+            layui.http.request('yonghu/page', 'get', {
+                yonghuming: username,
+                page: 1,
+                limit: 1
+            }, function(res) {
+                if (!res.data.list || res.data.list.length === 0) {
+                    resultEl.className = 'result-msg error';
+                    resultEl.textContent = '账号不存在';
+                    return;
+                }
+                var user = res.data.list[0];
+                if (user.lianxidianhua !== phone) {
+                    resultEl.className = 'result-msg error';
+                    resultEl.textContent = '手机号码与账号不匹配';
+                    return;
+                }
+                // Phone verified, reset password
+                layui.http.request('yonghu/resetPass', 'post', { username: username }, function(res) {
+                    resultEl.className = 'result-msg success';
+                    resultEl.textContent = '密码已重置为：123456，请使用新密码登录';
+                });
+            });
+        }
+
+        layui.use(['layer', 'form', 'http', 'jquery'], function() {
+            var layer = layui.layer;
+            var form = layui.form;
+            var http = layui.http;
+
+            form.on('submit(login)', function(data) {
+                data = data.field;
+                data.role = 'yonghu';
+                http.request('yonghu/login', 'get', data, function(res) {
+                    layer.msg('登录成功', { time: 1500, icon: 6 });
+                    localStorage.setItem('Token', res.token);
+                    localStorage.setItem('role', '用户');
+                    localStorage.setItem('userTable', 'yonghu');
+                    localStorage.setItem('sessionTable', 'yonghu');
+                    localStorage.setItem('adminName', data.username);
+                    http.request('yonghu/session', 'get', {}, function(res) {
+                        localStorage.setItem('userid', res.data.id);
+                        window.location.href = 'http://localhost:8086/index.html';
+                    });
+                });
+                return false;
+            });
+        });
+
+        function registerClick(tablename) {
+            window.location.href = '../' + tablename + '/register.html?tablename=' + tablename;
+        }
+    </script>
+</body>
+</html>

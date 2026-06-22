@@ -1,0 +1,254 @@
+/* ======== Modern Global Styles ======== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+:root {
+	--primary: #4F94EF;
+	--primary-light: #E8F1FD;
+	--primary-dark: #2563EB;
+	--accent: #10B981;
+	--accent-light: #D1FAE5;
+	--text-primary: #1F2937;
+	--text-secondary: #6B7280;
+	--text-muted: #9CA3AF;
+	--bg-primary: #FFFFFF;
+	--bg-secondary: #F9FAFB;
+	--bg-tertiary: #F3F4F6;
+	--border: #E5E7EB;
+	--border-light: #F3F4F6;
+	--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+	--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+	--radius-sm: 8px;
+	--radius-md: 12px;
+	--radius-lg: 16px;
+	--radius-xl: 20px;
+	--transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ======== 嵌套文字横线 ======== */
+.line-container {
+	width: 100%;
+	background: url(../img/line.jpg) left center repeat-x;
+	text-align: center;
+}
+
+.line {
+	display: inline-block;
+	padding: 0 10px;
+	text-align: center;
+	font-family: 'Noto Sans SC', sans-serif;
+	font-size: 24px;
+	background: #fff;
+	color: var(--text-primary);
+	line-height: 1.3;
+}
+
+/* ======== Form Enhancement ======== */
+.layui-input,
+.layui-textarea,
+.layui-select {
+	border-radius: var(--radius-sm) !important;
+	border-color: var(--border) !important;
+	transition: var(--transition) !important;
+	font-family: 'Noto Sans SC', sans-serif !important;
+}
+
+.layui-input:focus,
+.layui-textarea:focus {
+	border-color: var(--primary) !important;
+	box-shadow: 0 0 0 3px rgba(79, 148, 239, 0.15) !important;
+}
+
+.layui-btn {
+	border-radius: var(--radius-sm) !important;
+	font-family: 'Noto Sans SC', sans-serif !important;
+	font-weight: 500 !important;
+	transition: var(--transition) !important;
+}
+
+.layui-btn-normal {
+	background: var(--primary) !important;
+}
+
+.layui-btn-normal:hover {
+	background: var(--primary-dark) !important;
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-md) !important;
+}
+
+/* ======== Card Enhancement ======== */
+.layui-card,
+.layui-panel {
+	border-radius: var(--radius-md) !important;
+	border: 1px solid var(--border-light) !important;
+	box-shadow: var(--shadow-sm) !important;
+	transition: var(--transition) !important;
+}
+
+.layui-card:hover,
+.layui-panel:hover {
+	box-shadow: var(--shadow-md) !important;
+}
+
+/* ======== Table Enhancement ======== */
+.layui-table {
+	border-radius: var(--radius-md) !important;
+	overflow: hidden;
+}
+
+.layui-table thead tr {
+	background: var(--bg-secondary) !important;
+}
+
+.layui-table th {
+	font-weight: 600 !important;
+	color: var(--text-secondary) !important;
+	font-size: 13px !important;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.layui-table td {
+	color: var(--text-primary) !important;
+	border-color: var(--border-light) !important;
+}
+
+.layui-table tr:hover td {
+	background: var(--primary-light) !important;
+}
+
+/* ======== Pagination Enhancement ======== */
+.layui-laypage a,
+.layui-laypage span {
+	border-radius: var(--radius-sm) !important;
+	font-family: 'Noto Sans SC', sans-serif !important;
+	transition: var(--transition) !important;
+}
+
+.layui-laypage .layui-laypage-curr em {
+	background: var(--primary) !important;
+	border-radius: var(--radius-sm) !important;
+}
+
+/* ======== Animations ======== */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+	from {
+		opacity: 0;
+		transform: translateX(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.5s ease forwards;
+}
+
+.animate-fade-up {
+	animation: fadeInUp 0.5s ease forwards;
+}
+
+.animate-slide-left {
+	animation: slideInLeft 0.5s ease forwards;
+}
+
+.animate-slide-right {
+	animation: slideInRight 0.5s ease forwards;
+}
+
+/* ======== Utility Classes ======== */
+.text-primary { color: var(--primary) !important; }
+.text-accent { color: var(--accent) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+
+.bg-primary { background-color: var(--bg-primary) !important; }
+.bg-secondary { background-color: var(--bg-secondary) !important; }
+.bg-tertiary { background-color: var(--bg-tertiary) !important; }
+
+.rounded-sm { border-radius: var(--radius-sm) !important; }
+.rounded-md { border-radius: var(--radius-md) !important; }
+.rounded-lg { border-radius: var(--radius-lg) !important; }
+.rounded-xl { border-radius: var(--radius-xl) !important; }
+
+.shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.shadow-md { box-shadow: var(--shadow-md) !important; }
+.shadow-lg { box-shadow: var(--shadow-lg) !important; }
+
+/* ======== Scrollbar ======== */
+::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+/* ======== Selection ======== */
+::selection {
+	background: var(--primary-light);
+	color: var(--primary-dark);
+}
+
+/* ======== Smooth Scroll ======== */
+html {
+	scroll-behavior: smooth;
+}
+
+/* ======== Focus Styles ======== */
+:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+}
+
+/* ======== Transition Classes ======== */
+.transition-all {
+	transition: var(--transition);
+}
+
+.hover-lift:hover {
+	transform: translateY(-2px);
+}
+
+.hover-scale:hover {
+	transform: scale(1.02);
+}

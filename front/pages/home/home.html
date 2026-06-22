@@ -1,0 +1,958 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="utf-8">
+<title>首页</title>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../../layui/css/layui.css">
+<link href="https://cdn.bootcdn.net/ajax/libs/Swiper/5.4.5/css/swiper.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../../xznstatic/css/common.css"/>
+<link rel="stylesheet" href="../../xznstatic/css/style.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="../../xznstatic/js/jquery-1.11.3.min.js"></script>
+<script src="../../xznstatic/js/jquery.SuperSlide.2.1.1.js"></script>
+</head>
+<style>
+	:root {
+		--primary: #4F94EF;
+		--primary-light: #E8F1FD;
+		--primary-dark: #2563EB;
+		--accent: #10B981;
+		--accent-light: #D1FAE5;
+		--warm: #F59E0B;
+		--warm-light: #FEF3C7;
+		--text-primary: #1F2937;
+		--text-secondary: #6B7280;
+		--text-muted: #9CA3AF;
+		--bg-primary: #FFFFFF;
+		--bg-secondary: #F9FAFB;
+		--bg-tertiary: #F3F4F6;
+		--border: #E5E7EB;
+		--border-light: #F3F4F6;
+		--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+		--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+		--radius-sm: 8px;
+		--radius-md: 12px;
+		--radius-lg: 16px;
+		--radius-xl: 20px;
+		--transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+
+	html, body {
+		height: 100%;
+		font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		-webkit-font-smoothing: antialiased;
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+	}
+
+	/* ======== Banner ======== */
+	.banner {
+		position: relative;
+		overflow: hidden;
+	}
+
+	#test1 {
+		overflow: hidden;
+		border-radius: 0;
+	}
+
+	#test1 .layui-carousel-ind li {
+		width: 28px;
+		height: 4px;
+		border-radius: 2px;
+		background-color: rgba(255, 255, 255, 0.5);
+		border: none;
+		box-shadow: none;
+		transition: var(--transition);
+	}
+
+	#test1 .layui-carousel-ind li.layui-this {
+		width: 40px;
+		height: 4px;
+		border-radius: 2px;
+		background-color: #FFFFFF;
+		box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+	}
+
+	/* ======== Search Section ======== */
+	.search-section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 28px 20px;
+		background: var(--bg-primary);
+		border-bottom: 1px solid var(--border-light);
+		gap: 12px;
+	}
+
+	.search-section select {
+		height: 44px;
+		padding: 0 16px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		background: var(--bg-primary);
+		color: var(--text-secondary);
+		font-size: 14px;
+		font-family: inherit;
+		outline: none;
+		cursor: pointer;
+		transition: var(--transition);
+		appearance: none;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236B7280' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 12px center;
+		padding-right: 36px;
+	}
+
+	.search-section select:focus {
+		border-color: var(--primary);
+		box-shadow: 0 0 0 3px rgba(79, 148, 239, 0.15);
+	}
+
+	.search-section input[type="text"] {
+		height: 44px;
+		width: 300px;
+		padding: 0 16px;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		background: var(--bg-primary);
+		color: var(--text-primary);
+		font-size: 14px;
+		font-family: inherit;
+		outline: none;
+		transition: var(--transition);
+	}
+
+	.search-section input[type="text"]:focus {
+		border-color: var(--primary);
+		box-shadow: 0 0 0 3px rgba(79, 148, 239, 0.15);
+	}
+
+	.search-section input[type="text"]::placeholder {
+		color: var(--text-muted);
+	}
+
+	.search-section .layui-btn {
+		height: 44px;
+		padding: 0 28px;
+		background: var(--primary);
+		color: #FFFFFF;
+		border: none;
+		border-radius: var(--radius-sm);
+		font-size: 15px;
+		font-weight: 500;
+		font-family: inherit;
+		cursor: pointer;
+		transition: var(--transition);
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.search-section .layui-btn:hover {
+		background: var(--primary-dark);
+		transform: translateY(-1px);
+		box-shadow: var(--shadow-md);
+	}
+
+	/* ======== Section Common ======== */
+	.section-block {
+		padding: 64px 0;
+		background: var(--bg-primary);
+	}
+
+	.section-block:nth-child(even) {
+		background: var(--bg-secondary);
+	}
+
+	.section-inner {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
+
+	/* ======== Section Title ======== */
+	.section-header {
+		text-align: center;
+		margin-bottom: 44px;
+	}
+
+	.section-header .en-title {
+		display: block;
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--primary);
+		margin-bottom: 10px;
+		opacity: 0.8;
+	}
+
+	.section-header .cn-title {
+		display: block;
+		font-size: 28px;
+		font-weight: 700;
+		color: var(--text-primary);
+		letter-spacing: -0.01em;
+	}
+
+	.section-header .cn-title::after {
+		content: '';
+		display: block;
+		width: 40px;
+		height: 3px;
+		background: linear-gradient(90deg, var(--primary), var(--accent));
+		margin: 16px auto 0;
+		border-radius: 2px;
+	}
+
+	/* ======== Product Grid ======== */
+	.product-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 20px;
+	}
+
+	.product-card {
+		position: relative;
+		border-radius: var(--radius-lg);
+		overflow: hidden;
+		cursor: pointer;
+		background: var(--bg-tertiary);
+		transition: var(--transition);
+	}
+
+	.product-card:hover {
+		transform: translateY(-6px);
+		box-shadow: var(--shadow-xl);
+	}
+
+	.product-card .card-img-wrap {
+		position: relative;
+		overflow: hidden;
+		aspect-ratio: 4 / 3;
+	}
+
+	.product-card .card-img-wrap img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.product-card:hover .card-img-wrap img {
+		transform: scale(1.08);
+	}
+
+	/* Gradient overlay on image */
+	.product-card .card-img-wrap::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.4) 0%, transparent 50%);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+	}
+
+	.product-card:hover .card-img-wrap::after {
+		opacity: 1;
+	}
+
+	/* Quick action overlay */
+	.product-card .card-actions {
+		position: absolute;
+		bottom: 16px;
+		left: 50%;
+		transform: translateX(-50%) translateY(20px);
+		display: flex;
+		gap: 8px;
+		opacity: 0;
+		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		z-index: 2;
+	}
+
+	.product-card:hover .card-actions {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+
+	.card-actions .action-btn {
+		width: 36px;
+		height: 36px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(255, 255, 255, 0.95);
+		border: none;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: var(--transition);
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	}
+
+	.card-actions .action-btn:hover {
+		background: var(--primary);
+		color: white;
+		transform: scale(1.1);
+	}
+
+	.card-actions .action-btn svg {
+		width: 16px;
+		height: 16px;
+	}
+
+	/* Card body */
+	.product-card .card-body {
+		padding: 16px 18px 18px;
+	}
+
+	.product-card .card-title {
+		font-size: 16px;
+		font-weight: 600;
+		color: var(--text-primary);
+		line-height: 1.4;
+		margin-bottom: 10px;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		transition: var(--transition);
+	}
+
+	.product-card:hover .card-title {
+		color: var(--primary);
+	}
+
+	.product-card .card-price {
+		font-size: 20px;
+		font-weight: 700;
+		color: var(--primary);
+		letter-spacing: -0.02em;
+	}
+
+	.product-card .card-price .currency {
+		font-size: 13px;
+		font-weight: 500;
+	}
+
+	/* ======== Featured Product (First card, larger) ======== */
+	.product-grid .product-card:first-child {
+		grid-row: span 2;
+	}
+
+	.product-grid .product-card:first-child .card-img-wrap {
+		aspect-ratio: auto;
+		height: 100%;
+	}
+
+	.product-grid .product-card:first-child .card-body {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding: 28px 24px;
+		background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+		z-index: 1;
+	}
+
+	.product-grid .product-card:first-child .card-title {
+		color: #FFFFFF;
+		font-size: 20px;
+	}
+
+	.product-grid .product-card:first-child:hover .card-title {
+		color: #FFFFFF;
+	}
+
+	.product-grid .product-card:first-child .card-price {
+		color: #FFFFFF;
+	}
+
+	/* ======== News Section ======== */
+	.news-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+	}
+
+	.news-card {
+		display: flex;
+		background: var(--bg-primary);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		border: 1px solid var(--border-light);
+		cursor: pointer;
+		transition: var(--transition);
+	}
+
+	.news-card:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-lg);
+		border-color: transparent;
+	}
+
+	.news-card .news-img {
+		width: 200px;
+		min-height: 160px;
+		flex-shrink: 0;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.news-card .news-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.news-card:hover .news-img img {
+		transform: scale(1.06);
+	}
+
+	/* Date badge on news image */
+	.news-card .news-date-badge {
+		position: absolute;
+		top: 12px;
+		left: 12px;
+		background: rgba(255, 255, 255, 0.95);
+		backdrop-filter: blur(4px);
+		border-radius: 10px;
+		padding: 6px 10px;
+		text-align: center;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		line-height: 1;
+	}
+
+	.news-card .news-date-badge .day {
+		display: block;
+		font-size: 18px;
+		font-weight: 700;
+		color: var(--primary);
+	}
+
+	.news-card .news-date-badge .month {
+		display: block;
+		font-size: 10px;
+		color: var(--text-muted);
+		margin-top: 2px;
+	}
+
+	.news-card .news-body {
+		flex: 1;
+		padding: 20px 22px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.news-card .news-title {
+		font-size: 17px;
+		font-weight: 600;
+		color: var(--text-primary);
+		line-height: 1.6;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		transition: var(--transition);
+	}
+
+	.news-card:hover .news-title {
+		color: var(--primary);
+	}
+
+	.news-card .news-desc {
+		font-size: 13px;
+		color: var(--text-muted);
+		line-height: 1.6;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		margin-top: 8px;
+	}
+
+	.news-card .news-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-top: 12px;
+	}
+
+	.news-card .news-time {
+		font-size: 13px;
+		color: var(--text-muted);
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.news-card .news-time::before {
+		content: '';
+		width: 14px;
+		height: 14px;
+		background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'/%3E%3C/svg%3E") no-repeat center;
+		background-size: contain;
+	}
+
+	.news-card .news-read-more {
+		font-size: 13px;
+		color: var(--primary);
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		opacity: 0;
+		transform: translateX(-8px);
+		transition: all 0.3s ease;
+	}
+
+	.news-card:hover .news-read-more {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	.news-card .news-read-more svg {
+		width: 14px;
+		height: 14px;
+	}
+
+	/* ======== View More Button ======== */
+	.view-more-wrap {
+		text-align: center;
+		margin-top: 40px;
+	}
+
+	.view-more-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		padding: 13px 36px;
+		background: transparent;
+		color: var(--primary);
+		border: 1.5px solid var(--primary);
+		border-radius: 100px;
+		font-size: 15px;
+		font-weight: 500;
+		font-family: inherit;
+		cursor: pointer;
+		transition: var(--transition);
+	}
+
+	.view-more-btn:hover {
+		background: var(--primary);
+		color: #FFFFFF;
+		transform: translateY(-2px);
+		box-shadow: 0 6px 16px rgba(79, 148, 239, 0.3);
+	}
+
+	.view-more-btn svg {
+		width: 16px;
+		height: 16px;
+		transition: transform 0.25s ease;
+	}
+
+	.view-more-btn:hover svg {
+		transform: translateX(4px);
+	}
+
+	/* ======== Animations ======== */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(28px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.animate-in {
+		opacity: 0;
+		animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+	}
+
+	.animate-delay-1 { animation-delay: 0.08s; }
+	.animate-delay-2 { animation-delay: 0.16s; }
+	.animate-delay-3 { animation-delay: 0.24s; }
+	.animate-delay-4 { animation-delay: 0.32s; }
+	.animate-delay-5 { animation-delay: 0.4s; }
+	.animate-delay-6 { animation-delay: 0.48s; }
+
+	/* ======== Scroll Reveal ======== */
+	.reveal {
+		opacity: 0;
+		transform: translateY(40px);
+		transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.reveal.visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	/* ======== Responsive ======== */
+	@media (max-width: 1024px) {
+		.product-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.search-section input[type="text"] {
+			width: 180px;
+		}
+
+		.product-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.product-grid .product-card:first-child {
+			grid-row: span 1;
+		}
+
+		.product-grid .product-card:first-child .card-img-wrap {
+			aspect-ratio: 4 / 3;
+		}
+
+		.product-grid .product-card:first-child .card-body {
+			position: relative;
+			background: none;
+			padding: 16px 18px 18px;
+		}
+
+		.product-grid .product-card:first-child .card-title {
+			color: var(--text-primary);
+			font-size: 16px;
+		}
+
+		.product-grid .product-card:first-child .card-price {
+			color: var(--primary);
+		}
+
+		.news-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.news-card .news-img {
+			width: 140px;
+		}
+
+		.section-block {
+			padding: 40px 0;
+		}
+
+		.section-header .cn-title {
+			font-size: 24px;
+		}
+	}
+</style>
+<body>
+  <div id="app">
+    <div class="banner">
+		<div class="layui-carousel" id="test1">
+		  <div carousel-item>
+			<div v-for="(item,index) in swiperList" :key="index">
+				<img style="width: 100%;height: 100%;object-fit:cover;" :src="item.img" />
+			</div>
+		  </div>
+		</div>
+    </div>
+
+	<!-- Search -->
+	<div class="search-section">
+		<select v-if="queryList.length>1" @change="queryChange($event)" name="queryName" id="queryName">
+			<option v-for="(item,index) in queryList" v-bind:key="index" :value="index">{{item.queryName}}</option>
+		</select>
+		<input v-if="queryIndex==0" type="text" name="shangpinxinxishangpinmingcheng" id="shangpinxinxishangpinmingcheng" placeholder="搜索商品名称..." autocomplete="off">
+		<button v-if="queryIndex==0" id="btn-search" @click="jump('../shangpinxinxi/list.html')" type="button" class="layui-btn layui-btn-normal">
+			<i class="layui-icon layui-icon-search"></i>搜索
+		</button>
+	</div>
+
+    <div id="content">
+	<!-- Product Recommendation -->
+	<div class="section-block">
+	  <div class="section-inner reveal">
+	    <div class="section-header">
+	      <span class="en-title">Recommend</span>
+	      <span class="cn-title">商品推荐</span>
+	    </div>
+		<div class="product-grid">
+		    <div v-if="shangpinxinxiRecommend.length>0" class="product-card animate-in" @click="jump('../shangpinxinxi/detail.html?id='+shangpinxinxiRecommend[0].id)">
+				<div class="card-img-wrap">
+					<img :src="shangpinxinxiRecommend[0].tupian?shangpinxinxiRecommend[0].tupian.split(',')[0]:''" alt="" />
+				</div>
+				<div class="card-body">
+					<div class="card-title">{{shangpinxinxiRecommend[0].shangpinmingcheng}}</div>
+					<div class="card-price"><span class="currency">¥</span>{{shangpinxinxiRecommend[0].price}}</div>
+				</div>
+		    </div>
+			<div v-if="shangpinxinxiRecommend.length>1" class="product-card animate-in animate-delay-1" @click="jump('../shangpinxinxi/detail.html?id='+shangpinxinxiRecommend[1].id)">
+				<div class="card-img-wrap">
+					<img :src="shangpinxinxiRecommend[1].tupian?shangpinxinxiRecommend[1].tupian.split(',')[0]:''" alt="" />
+					<div class="card-actions">
+						<button class="action-btn" title="查看详情">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+						</button>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="card-title">{{shangpinxinxiRecommend[1].shangpinmingcheng}}</div>
+					<div class="card-price"><span class="currency">¥</span>{{shangpinxinxiRecommend[1].price}}</div>
+				</div>
+			</div>
+			<div v-if="shangpinxinxiRecommend.length>2" class="product-card animate-in animate-delay-2" @click="jump('../shangpinxinxi/detail.html?id='+shangpinxinxiRecommend[2].id)">
+				<div class="card-img-wrap">
+					<img :src="shangpinxinxiRecommend[2].tupian?shangpinxinxiRecommend[2].tupian.split(',')[0]:''" alt="" />
+					<div class="card-actions">
+						<button class="action-btn" title="查看详情">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+						</button>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="card-title">{{shangpinxinxiRecommend[2].shangpinmingcheng}}</div>
+					<div class="card-price"><span class="currency">¥</span>{{shangpinxinxiRecommend[2].price}}</div>
+				</div>
+			</div>
+			<div v-if="shangpinxinxiRecommend.length>3" class="product-card animate-in animate-delay-3" @click="jump('../shangpinxinxi/detail.html?id='+shangpinxinxiRecommend[3].id)">
+				<div class="card-img-wrap">
+					<img :src="shangpinxinxiRecommend[3].tupian?shangpinxinxiRecommend[3].tupian.split(',')[0]:''" alt="" />
+					<div class="card-actions">
+						<button class="action-btn" title="查看详情">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+						</button>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="card-title">{{shangpinxinxiRecommend[3].shangpinmingcheng}}</div>
+					<div class="card-price"><span class="currency">¥</span>{{shangpinxinxiRecommend[3].price}}</div>
+				</div>
+			</div>
+			<div v-if="shangpinxinxiRecommend.length>4" class="product-card animate-in animate-delay-4" @click="jump('../shangpinxinxi/detail.html?id='+shangpinxinxiRecommend[4].id)">
+				<div class="card-img-wrap">
+					<img :src="shangpinxinxiRecommend[4].tupian?shangpinxinxiRecommend[4].tupian.split(',')[0]:''" alt="" />
+					<div class="card-actions">
+						<button class="action-btn" title="查看详情">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+						</button>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="card-title">{{shangpinxinxiRecommend[4].shangpinmingcheng}}</div>
+					<div class="card-price"><span class="currency">¥</span>{{shangpinxinxiRecommend[4].price}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="view-more-wrap">
+			<button @click="jump('../shangpinxinxi/list.html')" type="button" class="view-more-btn">
+				查看更多
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+			</button>
+		</div>
+	  </div>
+	</div>
+
+	<!-- News Section -->
+	<div class="section-block">
+	  <div class="section-inner reveal">
+	    <div class="section-header">
+	      <span class="en-title">Latest News</span>
+	      <span class="cn-title">商品资讯</span>
+	    </div>
+	    <div class="news-grid">
+	      <div v-for="(item,index) in newsList" :key="index" class="news-card animate-in" :class="'animate-delay-' + (index % 5 + 1)" @click="jump('../news/detail.html?id='+item.id)">
+			<div class="news-img">
+				<img :src="item.picture" alt="" />
+				<div class="news-date-badge" v-if="item.day">
+					<span class="day">{{item.day}}</span>
+					<span class="month">{{item.month}}</span>
+				</div>
+			</div>
+	        <div class="news-body">
+			<div>
+				<div class="news-title">{{item.title}}</div>
+				<div class="news-desc">{{item.introduction | newsDesc}}</div>
+			</div>
+			<div class="news-footer">
+				<div class="news-time">{{item.addtime}}</div>
+				<div class="news-read-more">
+					阅读全文
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+				</div>
+			</div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="view-more-wrap">
+			<button @click="jump('../news/list.html')" type="button" class="view-more-btn">
+				查看更多资讯
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+			</button>
+		</div>
+	  </div>
+	</div>
+
+    </div>
+  </div>
+
+  <script src="../../layui/layui.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/5.4.5/js/swiper.min.js"></script>
+  <script src="../../js/vue.js"></script>
+  <script src="../../js/config.js"></script>
+  <script src="../../modules/config.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script type="text/javascript">
+    var vue = new Vue({
+      el: '#app',
+      data: {
+            queryList:[
+                {
+                    queryName:"商品名称",
+                },
+            ],
+            queryIndex: 0,
+
+        shangpinxinxiRecommend: [],
+
+        swiperList: [],
+        newsList: [],
+        leftNewsList: [],
+        rightNewsList: []
+      },
+      filters: {
+        newsDesc: function(val) {
+          if (val) {
+            val = val.replace(/<[^<>]+>/g, '').replace(/undefined/g, '');
+            if (val.length > 80) {
+              val = val.substring(0, 80) + '...';
+            }
+            return val;
+          }
+          return '';
+        }
+      },
+      methods: {
+        jump(url) {
+		if (this.queryIndex == 0) {
+			localStorage.setItem('indexQueryCondition', document.getElementById("shangpinxinxishangpinmingcheng").value);
+		}
+          	jump(url)
+        },
+	queryChange(event) {
+		this.queryIndex = event.target.value;
+		if (this.queryIndex == 0) {
+			this.shangpinxinxishangpinmingcheng = this.queryList[event.target.value].queryName;
+		}
+	}
+      }
+    });
+
+    // Scroll reveal
+    function revealOnScroll() {
+        var reveals = document.querySelectorAll('.reveal');
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 80;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add('visible');
+            }
+        }
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+
+    layui.use(['layer', 'form', 'element', 'carousel', 'http', 'jquery'], function() {
+		var layer = layui.layer;
+		var element = layui.element;
+		var form = layui.form;
+		var carousel = layui.carousel;
+		var http = layui.http;
+		var jquery = layui.jquery;
+
+      // 获取轮播图
+      http.request('config/list', 'get', {
+        page: 1,
+        limit: 5
+      }, function(res) {
+        if (res.data.list.length > 0) {
+          let swiperList = [];
+          res.data.list.forEach(element => {
+            if (element.value != null) {
+              swiperList.push({
+                img: element.value
+              });
+            }
+          });
+
+		  vue.swiperList = swiperList;
+
+		  vue.$nextTick(() => {
+		    carousel.render({
+		    	elem: '#test1',
+				width: '100%',
+		    	height: '520px',
+		    	arrow: 'hover',
+		    	anim: 'default',
+		    	autoplay: 'true',
+		    	interval: '4000',
+		    	indicator: 'inside'
+		    });
+		  })
+        }
+      });
+
+      // 商品资讯
+      http.request('news/list', 'get', {
+        page: 1,
+		limit: 4,
+        order: 'desc'
+      }, function(res) {
+        var newsList = res.data.list;
+		for(var i = 0; i<newsList.length; i++) {
+			let d = newsList[i].addtime.split(' ')
+			d = d[0].split('-')
+			newsList[i].year = d[0]
+			newsList[i].day = d[2]
+			newsList[i].month = d[1] + '月'
+		}
+        vue.newsList = newsList;
+      });
+
+      // 获取推荐信息
+      http.request(`shangpinxinxi/autoSort`, 'get', {
+        page: 1,
+		}, function(res) {
+			vue.shangpinxinxiRecommend = res.data.list
+		});
+  });
+  </script>
+</body>
+</html>

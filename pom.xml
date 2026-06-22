@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.2.2.RELEASE</version>
+		<relativePath/>
+	</parent>
+	<groupId>com.jlwl</groupId>
+	<artifactId>shop-online</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ShopOnline Microservices</name>
+	<description>网上商城微服务架构</description>
+
+	<modules>
+		<module>shop-common</module>
+		<module>shop-registry</module>
+		<module>shop-gateway</module>
+		<module>shop-user</module>
+		<module>shop-product</module>
+		<module>shop-order</module>
+		<module>shop-shopping</module>
+		<module>shop-content</module>
+		<module>shop-system</module>
+	</modules>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<fastjson.version>1.2.8</fastjson.version>
+		<spring-cloud.version>Hoxton.SR10</spring-cloud.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.jlwl</groupId>
+				<artifactId>shop-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>false</fork>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
